@@ -1,7 +1,8 @@
-package com.swvl.movietask
+package com.swvl.movietask.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.swvl.movietask.R
 
 class MainActivity : AppCompatActivity() {
 
