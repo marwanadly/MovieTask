@@ -1,6 +1,8 @@
 package com.swvl.movietask.di.modules
 
 import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.swvl.movietask.data.preferences.AppPreferences
 import com.swvl.movietask.data.preferences.Preferences
 import com.swvl.movietask.di.scope.ApplicationScope
@@ -22,5 +24,11 @@ class ApplicationModule(context: Context) {
     @ApplicationScope
     fun provideAppPreference(context: Context): Preferences {
         return AppPreferences(context)
+    }
+
+    @Provides
+    @ApplicationScope
+    fun getGson() : Gson {
+        return GsonBuilder().create()
     }
 }
