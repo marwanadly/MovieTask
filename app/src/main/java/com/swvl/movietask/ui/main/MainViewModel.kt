@@ -12,4 +12,8 @@ class MainViewModel @Inject constructor(private val dataManager: DataManager) {
     fun retrieveAllMovies(){
         moviesList.value = dataManager.retrieveAllMovies()
     }
+
+    fun searchForMovies(criteria: String): List<MovieEntry> {
+        return dataManager.searchForMovies(criteria)
+    }
 }

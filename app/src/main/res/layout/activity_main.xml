@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true" android:background="#E8E8E8">
 
     <EditText
             android:layout_width="0dp"

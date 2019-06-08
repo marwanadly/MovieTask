@@ -4,7 +4,7 @@
           package="com.swvl.movietask">
 
     <dist:module dist:instant="true"/>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
             android:name=".MoviesTaskApplication"
             android:allowBackup="true"

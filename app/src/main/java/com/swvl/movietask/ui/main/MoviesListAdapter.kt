@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import com.swvl.movietask.R
 import com.swvl.movietask.model.MovieEntry
 import kotlinx.android.synthetic.main.movie_list_item.view.*
+import timber.log.Timber
 
-class MoviesListAdapter(val movies : ArrayList<MovieEntry>, val context: Context) : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder>() {
+class MoviesListAdapter(var movies : ArrayList<MovieEntry>, val context: Context, var grouped:Boolean) : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(LayoutInflater.from(context).inflate(R.layout.movie_list_item, parent, false))
@@ -20,7 +21,9 @@ class MoviesListAdapter(val movies : ArrayList<MovieEntry>, val context: Context
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        Timber.i("HERE IS GROUPED FLAG $grouped")
         holder.movieTitle.text = movies[position].title + " (${movies[position].year})"
+        holder.yearLabel.text = movies[position].year.toString()
         if(movies[position].genres!!.size > 0){
             var genres = ""
             for (genre in movies[position].genres!!){
@@ -40,11 +43,29 @@ class MoviesListAdapter(val movies : ArrayList<MovieEntry>, val context: Context
         }else{
             holder.cast.visibility = View.GONE
         }
+
+        if(grouped){
+            holder.yearLabel.visibility = View.VISIBLE
+            if(position >= 1){
+                if(movies[position].year == movies[position-1].year){
+                    holder.yearLabel.visibility = View.GONE
+                }
+            }
+        }else{
+            holder.yearLabel.visibility = View.GONE
+        }
+    }
+
+    fun searchResult(movies:ArrayList<MovieEntry>,grouped: Boolean){
+        this.movies = movies
+        this.grouped = grouped
+        notifyDataSetChanged()
     }
 
     inner class MovieViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         val movieTitle = view.movie_title!!
         val genres = view.genres!!
-        var cast = view.cast!!
+        val cast = view.cast!!
+        val yearLabel = view.year_label
     }
 }

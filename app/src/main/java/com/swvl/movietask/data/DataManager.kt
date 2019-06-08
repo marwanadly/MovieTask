@@ -41,4 +41,5 @@ class DataManager @Inject constructor(private val mContext:Context,
 
     fun retrieveAllMovies():List<MovieEntry> = realmDBManager.retrieveAllMovies().toList()
     fun getInsertionFlag(): MutableLiveData<Int> = realmDBManager.insertionFlag
+    fun searchForMovies(criteria: String): List<MovieEntry> = realmDBManager.searchForMovies(criteria).toList()
 }
