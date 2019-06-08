@@ -5,6 +5,7 @@ import com.squareup.leakcanary.LeakCanary
 import com.swvl.movietask.di.components.ApplicationComponent
 import com.swvl.movietask.di.components.DaggerApplicationComponent
 import com.swvl.movietask.di.modules.ApplicationModule
+import io.realm.Realm
 import timber.log.Timber
 
 class MoviesTaskApplication : Application(){
@@ -16,6 +17,8 @@ class MoviesTaskApplication : Application(){
         if(com.swvl.movietask.BuildConfig.DEBUG){
             Timber.plant(Timber.DebugTree())
         }
+
+        Realm.init(this)
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return

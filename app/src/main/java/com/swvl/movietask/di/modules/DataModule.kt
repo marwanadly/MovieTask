@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.swvl.movietask.data.DataManager
 import com.swvl.movietask.data.local.RealmDBManager
+import com.swvl.movietask.di.scope.ApplicationScope
 import dagger.Module
 import io.realm.RealmConfiguration
 import javax.inject.Singleton
@@ -14,19 +15,13 @@ import io.realm.Realm
 @Module
 class DataModule {
 
-
-    @Provides
-    fun providesRealmDBManager(realm: Realm): RealmDBManager {
-        return RealmDBManager(realm)
-    }
-
     @Provides
     fun providesRealm(realmConfiguration: RealmConfiguration): Realm {
         return Realm.getInstance(realmConfiguration)
     }
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun providesRealmConfiguration(): RealmConfiguration {
         val builder = RealmConfiguration.Builder()
         builder.deleteRealmIfMigrationNeeded()
@@ -34,7 +29,12 @@ class DataModule {
     }
 
     @Provides
-    @Singleton
+    fun providesRealmDBManager(realm: Realm): RealmDBManager {
+        return RealmDBManager(realm)
+    }
+
+    @Provides
+    @ApplicationScope
     fun providesDataManager(context: Context, gson: Gson, realmDBManager: RealmDBManager):DataManager {
         return DataManager(context,gson,realmDBManager)
     }

@@ -28,7 +28,7 @@ class ApplicationModule(context: Context) {
 
     @Provides
     @ApplicationScope
-    fun getGson() : Gson {
+    fun provideGson() : Gson {
         return GsonBuilder().create()
     }
 }
