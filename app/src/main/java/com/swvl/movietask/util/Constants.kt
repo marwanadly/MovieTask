@@ -12,5 +12,6 @@ class Constants {
         const val MOVIES_FILE_NAME  = "movies.json"
         const val INSERTED_SUCCESSFULLY = 0
         const val INSERT_FAILED = 1
+        const val DETAILS_EXTRA = "movie_details"
     }
 }

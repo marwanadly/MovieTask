@@ -7,7 +7,6 @@ import io.realm.Case
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
-import timber.log.Timber
 
 class RealmDBManager(var realm: Realm) {
 
@@ -26,7 +25,6 @@ class RealmDBManager(var realm: Realm) {
             .contains("title",criteria,Case.INSENSITIVE)
             .sort("year",Sort.ASCENDING,"rating",Sort.DESCENDING)
             .findAll().groupBy { groupBy-> groupBy.year }.values.map { groupedMovies-> groupedMovies.take(5) }
-        Timber.i("HERE IS THE SEARCH : ${searchResult.map { s-> return@map s.size }}")
         val finalResult = ArrayList<MovieEntry>()
         searchResult.map { sortedMovies-> finalResult.addAll(sortedMovies) }
         return finalResult.toList()

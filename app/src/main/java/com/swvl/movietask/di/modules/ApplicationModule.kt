@@ -9,7 +9,7 @@ import com.swvl.movietask.di.scope.ApplicationScope
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = [DataModule::class])
+@Module(includes = [DataModule::class,NetworkModule::class])
 class ApplicationModule(context: Context) {
 
     private var mContext: Context = context

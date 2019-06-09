@@ -7,6 +7,7 @@ import com.swvl.movietask.data.local.RealmDBManager
 import com.swvl.movietask.data.preferences.Preferences
 import com.swvl.movietask.di.modules.ApplicationModule
 import com.swvl.movietask.di.scope.ApplicationScope
+import com.swvl.movietask.network.MovieDbService
 import dagger.Component
 
 @ApplicationScope
@@ -18,4 +19,5 @@ interface ApplicationComponent {
     fun getAppPreference(): Preferences
     fun getGson(): Gson
     fun getRealmDBManager(): RealmDBManager
+    fun getFlickrService(): MovieDbService
 }
